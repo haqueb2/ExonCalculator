@@ -47,7 +47,7 @@ cdsEnd       | Coding region end (or start position for - strand)
 exonCount    | Number of exons 
 exonStarts   | Semicolon separated exon start positions (or end positions for - strand)
 exonEnds     | Semicolon separated exon end positions (or start positions for - strand)
-exonLength   | Length of exons in bp 
+exonLength   | Semicolon separated length of exons in bp 
 score        | Score
 name2        | Gene name 
 cdsStartStat | Status of CDS start annotation (none, unknown, incomplete, or complete)
