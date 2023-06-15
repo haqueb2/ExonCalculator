@@ -16,15 +16,15 @@ To use this code, follow the instructions below:
 
 ### Installation
 
-1. For MacOS, download mysql using Homebrew: 'brew install mysql' 
-2. Download the Jupyter Notebook file: data_reformatting_script.ipynb 
+1. For MacOS, download mysql using Homebrew: `brew install mysql` 
+2. Download the shell script file: exon_length.sh
 
 ### Usage
-Prepare your input data file named data.csv with the required columns: 'Hugo_Symbol', 'Amino_Acid_Position', 'Reference_Amino_Acid', 'Variant_Amino_Acid', 'Codon_Change', and 'Genomic_Position'.
+Prepare your input data file named "nm_numbers.txt" with 
 
-Run the script using Jupyter Notebook. 
+Run the script in terminal with:  
 
-The script will process the data, generate results, and save them in an Excel file named data_reformat_results.xlsx.
+The script will process the data, generate results, and save them in an Excel file named "output.csv".
 
 ### Contributing
 Contributions to this repository are welcome. If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
