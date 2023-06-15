@@ -1,6 +1,6 @@
 # ExonCalculator
 
-Reformatting cancer mutation data from the Cancer Hotspots database (https://www.cancerhotspots.org/)
+Description
 
 This repository contains code for 
 
