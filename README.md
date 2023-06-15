@@ -58,8 +58,9 @@ exonFrames   | Exon frame {0,1,2}, or -1 if no frame for exon
 Contributions to this repository are welcome. If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
 
 ### Contact
+
 Bushra Haque 
-bushra.haque@sickkids.ca
+Email: bushra.haque@sickkids.ca
 
 ### License
 This project is licensed under the MIT License.
