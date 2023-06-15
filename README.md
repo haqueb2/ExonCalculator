@@ -64,8 +64,7 @@ Contributions to this repository are welcome. If you find any issues or have sug
 
 ### Contact
 
-Bushra Haque 
-Email: bushra.haque@sickkids.ca
+Bushra Haque: bushra.haque@sickkids.ca
 
 ### License
 This project is licensed under the MIT License.
