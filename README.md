@@ -35,24 +35,24 @@ The script will process the data, generate results, and save them in an output f
 Details of the columns of the output file: 
 
 Column       | Description
--------------| -------------
-bin          | Content Cell
-name         | Content Cell
-chrom        |
-strand       |
-txStart      |
-txEnd        |
-cdsStart     |
-cdsEnd       |
-exonCount    |
-exonStarts   |
-exonEnds     |
-exonLength   |
-score        |
-name2        |  
-cdsStartStat |
-cdsEndStat   |
-exonFrames   |
+-------------| ----------------------------------------------------------------------------
+bin          | Indexing field to speed chromosome range queries
+name         | Name of the gene (usually NM number in the input file)
+chrom        | Reference sequence chromosome 
+strand       | Forward (+) or reverse (-) strand 
+txStart      | Transcription start positive (or end position for - strand) 
+txEnd        | Transcription end position (or start position for - strand)
+cdsStart     | Coding region start (or end position for - strand)
+cdsEnd       | Coding region end (or start position for - strand)
+exonCount    | Number of exons 
+exonStarts   | Semicolon separated exon start positions (or end positions for - strand)
+exonEnds     | Semicolon separated exon end positions (or start positions for - strand)
+exonLength   | Length of exons in bp 
+score        | Score
+name2        | Gene name 
+cdsStartStat | Status of CDS start annotation (none, unknown, incomplete, or complete)
+cdsEndStat   | Status of CDS end annotation (none, unknown, incomplete, or complete)
+exonFrames   | Exon frame {0,1,2}, or -1 if no frame for exon
 
 ### Contributing
 Contributions to this repository are welcome. If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
