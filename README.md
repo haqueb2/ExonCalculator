@@ -17,7 +17,12 @@ To use this code, follow the instructions below:
 
 ### Installation
 
-1. For MacOS, download mysql using Homebrew: `brew install mysql` 
+1. For macOS, you can download and install MySQL using Homebrew. Open the terminal and execute the following command:
+`brew install mysql`
+
+This will install MySQL on your macOS system. 
+For Windows, you can visit the [MySQL website](https://dev.mysql.com/downloads/windows/installer/) to downaload the MySQL Installer. The website provides detailed instructions on how to procees with the installation ona Windows OS. 
+
 2. Download the shell script file: exon_length.sh
 
 ### Usage
@@ -55,7 +60,7 @@ cdsEndStat   | Status of CDS end annotation (none, unknown, incomplete, or compl
 exonFrames   | Exon frame {0,1,2}, or -1 if no frame for exon
 
 ### Contributing
-Contributions to this repository are welcome. If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
+Contributions to this repository are welcome. If you find any issues or have suggestions for improvement, please open an issue.
 
 ### Contact
 
