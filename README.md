@@ -23,40 +23,39 @@ To use this code, follow the instructions below:
 This will install MySQL on your macOS system. 
 For Windows, you can visit the [MySQL website](https://dev.mysql.com/downloads/windows/installer/) to downaload the MySQL Installer. The website provides detailed instructions on how to procees with the installation ona Windows OS. 
 
-2. Download the shell script file: exon_length.sh
+2. Download the all shell script files including: ExonCalculator.sh, exon_length.sh, CDSfinder.sh 
 
 ### Usage
 
-Prepare input file with NM accession numbers of genes of interest and save in a plain text file named "nm_numbers.txt", following the same format as the example file. 
+Prepare input file with NM accession numbers of genes of interest and save in a plain text file named "transcript_ids.txt", following the same format as the example file. 
 
 Open the terminal and navigate to the directory where the shell script and the input file are located. 
 
-In the terminal, execute the following command:
+In the terminal, execute the following commands:
 
-`./exon_length.sh`
+`sh -c "$(wget -q https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh -O -)"`
 
-The script will process the data, generate results, and save them in an output file named "output.csv".
+`export PATH=${HOME}/edirect:${PATH}`
+
+Execute this command to run the program: 
+
+`./ExonCalculator.sh`
+
+The script will process the data, generate results, and save them in an output file named "ExonCalculator_output.csv".
 
 Details of the columns of the output file: 
 
 Column       | Description
 -------------| ----------------------------------------------------------------------------
-bin          | Indexing field to speed chromosome range queries
-name         | Name of the gene (usually NM number in the input file)
+transcript_id| Name of the gene (usually NM number in the input file)
+CDS_start    | Coding region start (or end position for - strand)
+CDS_end      | Coding region end (or start position for - strand)
 chrom        | Reference sequence chromosome 
 strand       | Forward (+) or reverse (-) strand 
-txStart      | Transcription start positive (or end position for - strand) 
-txEnd        | Transcription end position (or start position for - strand)
-cdsStart     | Coding region start (or end position for - strand)
-cdsEnd       | Coding region end (or start position for - strand)
 exonCount    | Number of exons 
 exonStarts   | Semicolon separated exon start positions (or end positions for - strand)
 exonEnds     | Semicolon separated exon end positions (or start positions for - strand)
 exonLength   | Semicolon separated length of exons in bp 
-score        | Score
-name2        | Gene name 
-cdsStartStat | Status of CDS start annotation (none, unknown, incomplete, or complete)
-cdsEndStat   | Status of CDS end annotation (none, unknown, incomplete, or complete)
 exonFrames   | Exon frame {0,1,2}, or -1 if no frame for exon
 
 ### Contributing
