@@ -52,6 +52,7 @@ CDS_start    | Coding region start (or end position for - strand)
 CDS_end      | Coding region end (or start position for - strand)
 chrom        | Reference sequence chromosome 
 strand       | Forward (+) or reverse (-) strand 
+gene         | Gene name
 exonCount    | Number of exons 
 exonStarts   | Semicolon separated exon start positions (or end positions for - strand)
 exonEnds     | Semicolon separated exon end positions (or start positions for - strand)
