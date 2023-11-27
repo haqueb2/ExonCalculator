@@ -4,7 +4,7 @@ This repository contains a shell script that allows you to extract information f
 
 * Chromosome
 * Transcription start/end position
-* Coding sequencing (CDS) start/end position
+* Coding sequencing (CDS) start/end position in hg38
 * Number of exons
 * Exon start/end positions
 * Exon length (bp)
