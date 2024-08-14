@@ -1,15 +1,14 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Database connection details
 host="genome-mysql.cse.ucsc.edu"
 user="genome"
 database="hg38"
 
-# Input file containing NM numbers
-input_file="transcript_ids.txt"
-
 # Output file name
-output_file="ExonLength_output.csv"
+output_file=${1:-"ExonLength_output.csv"}
 
 # Remove the existing output file if it exists
 rm -f "$output_file"
