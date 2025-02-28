@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Define the input file containing NM accession numbers
-input_file="transcript_ids.txt"
+set -euo pipefail
 
 # Define the output file where the CDS information will be stored
-output_file="CDS_output.csv"
+output_file=${1:-"CDS_output.csv"}
 
 # Write the header to output file
 echo "transcript_id,output" > "$output_file"
