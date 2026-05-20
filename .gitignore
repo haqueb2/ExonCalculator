@@ -1,3 +1,4 @@
 *.csv
 ExonLength_output
 transcript_ids.txt
+output/

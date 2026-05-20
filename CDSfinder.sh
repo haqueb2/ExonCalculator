@@ -1,28 +1,53 @@
 #!/bin/bash
+set -uo pipefail
 
-set -euo pipefail
+# Reads transcript IDs produced by exon_length.sh so that IDs always match
+input_file="output/ExonLength_output.csv"
+output_file="output/CDS_output.csv"
 
-# Define the output file where the CDS information will be stored
-output_file=${1:-"CDS_output.csv"}
+mkdir -p output
 
-# Write the header to output file
-echo "transcript_id,output" > "$output_file"
+echo "transcript_id,mane_status,CDS_start,CDS_end,CDS_length" > "$output_file"
 
-# Run the esearch and efetch commands and store the output in a temporary file
-temp_output=$(esearch -db nucleotide -query "$(cat "$input_file" | tr '\n' ' ')" | efetch -format gb | awk '/CDS/ {print $2}' | grep -E -o '[0-9]+\.\.[0-9]+' | grep -v '^$')
+while IFS=',' read -r transcript_id rest; do
 
-# Combine the data and write to the output file
-paste <(cat "$input_file") <(echo "$temp_output") | tr '\t' ',' >> "$output_file"
+  # Fetch the full GenBank record once; extract MANE status (from KEYWORDS) and
+  # CDS position in a single awk pass to avoid fetching twice.
+  # </dev/null prevents esearch from consuming the while-loop's stdin.
+  # Output format: "mane_status<TAB>cds_range"
+  result=$(esearch -db nucleotide -query "${transcript_id}[ACCN]" </dev/null 2>/dev/null | \
+           efetch -format gb 2>/dev/null | \
+           awk '
+             /^KEYWORDS/    { kw = $0 }
+             /^  /          { if (kw != "") kw = kw $0 }
+             /^ {5}CDS/ {
+               mane = ""
+               if (kw ~ /MANE Select/)             mane = "MANE Select"
+               else if (kw ~ /MANE Plus Clinical/) mane = "MANE Plus Clinical"
+               match($0, /[0-9]+\.\.[0-9]+/)
+               if (RSTART) { print mane "\t" substr($0, RSTART, RLENGTH); exit }
+             }
+           ')
 
-# Print a message indicating that the operation is complete
-echo "CDS information saved to $output_file"
+  IFS=$'\t' read -r mane_status cds <<< "$result"
+  mane_status="${mane_status:-}"
+  cds="${cds:-}"
 
-# Use the output column in the output file to extract the two values and calculate the difference
-awk -F',' 'BEGIN {print "transcript_id,CDS_start,CDS_end,CDS_length"} NR>1 {gsub(/\.\./,",",$2); split($2,a,","); len=a[2]-a[1]; print $1 "," a[1] "," a[2] "," len}' "$output_file" > temp_output.csv
+  # Skip transcripts that are not MANE Select or MANE Plus Clinical
+  if [ -z "$mane_status" ]; then
+    continue
+  fi
 
-# Overwrite the original output file with the new one containing the updated columns
-mv temp_output.csv "$output_file"
+  if [ -n "$cds" ]; then
+    start=$(echo "$cds" | grep -Eo '^[0-9]+')
+    end=$(echo   "$cds" | grep -Eo '[0-9]+$')
+    len=$((end - start))
+    echo "${transcript_id},${mane_status},${start},${end},${len}"
+  else
+    echo "${transcript_id},${mane_status},,,"
+  fi
 
-# Print a message indicating that the columns have been updated
-echo "CDS length calculated and updated in $output_file"
+done < <(tail -n +2 "$input_file") >> "$output_file"
+
+echo "CDS data saved to $output_file (MANE Select / MANE Plus Clinical only)"
 
